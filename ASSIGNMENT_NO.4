@@ -1,0 +1,60 @@
+#include<iostream>
+using namespace std;
+
+class complex {
+	
+public:
+    float real,imag;
+    complex():real(0), imag(0){}                 //default constructor
+    complex(float a,float b): real(a),imag(b){} //Parameterized constructor
+
+
+     //addition by operator overloading
+	complex operator +(const complex &c)const
+	{
+	   return complex(real + c.real, imag + c.imag);
+	}
+
+	//friend function
+	friend complex operator *(const complex &c1,const complex &c2);
+	friend istream& operator>>(istream &in, const complex &obj);
+	friend ostream& operator<<(ostream &out,const complex &obj);
+	};
+
+     //multiplication by operator overloading
+complex operator*(const complex &c1, const complex &c2){
+	return complex(
+	   (c1.real * c2.real) - (c1.imag * c2.imag),
+	   (c1.real * c2.imag) + (c1.imag * c2.real)
+	);
+}
+
+      // input
+istream& operator >> (istream &in, complex &obj){
+	cout << "Enter real part: ";
+		in>> obj.real;
+		cout << "Enter imaginary part: ";
+		in>> obj.imag;
+		return in;
+		}
+
+//output
+ostream& operator << (ostream &out, complex &obj){
+		out << obj.real<<"+ i"<<obj.imag;
+        return out;
+		}
+
+	int main(){
+		complex c1,c2,c3,c4;
+		cout <<"enter 1st complex no. :\n";
+		cin >> c1;
+		cout <<"enter 2nd complex no. :\n";
+		cin >> c2;
+		cout<<"\nFirst no. :"<< c1;
+		cout<<"\nSecond no. :"<< c2;
+		c3 = c1+c2;
+		cout<<"\nAddition of complex number: "<<c3;
+		c4 = c1*c2;
+		cout<<"\nmultiplication of complex number: "<<c4;
+		return 0;
+		}
