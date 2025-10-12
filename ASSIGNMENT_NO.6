@@ -1,0 +1,38 @@
+#include <iostream> 
+#include <exception> 
+using namespace std;
+ 
+class Test : public exception { 
+public: 
+double num1; 
+double num2; 
+void accept(); 
+void division(); 
+const char* what() { 
+return "Divide By Zero Exception\n"; 
+} 
+}; 
+void Test::accept() { 
+cout << "Enter first number: "<<endl; 
+cin >> num1; 
+cout << "Enter second number: "<<endl; 
+cin >> num2; 
+} 
+void Test::division() { 
+cout << "Division of two numbers: " << num1 / num2 << endl; 
+} 
+int main() { 
+Test t; 
+try { 
+t.accept(); 
+if (t.num2 == 0) { 
+throw t; // Throw the Test class object if num2 is zero 
+} else { 
+t.division(); // Perform division if num2 is not zero 
+} 
+} 
+catch (Test& a) { // Catch the custom exception by reference 
+cout << a.what(); // Print the exception message 
+} 
+return 0; 
+}
