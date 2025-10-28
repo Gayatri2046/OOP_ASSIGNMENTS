@@ -1,0 +1,46 @@
+#include <iostream>
+#include <map>
+#include <string>
+using namespace std;
+int main()
+{
+typedef map <int,string> mapType;
+mapType studentMap;
+studentMap.insert(pair<int,string>(1234,"Amit XYZ"));
+studentMap.insert(pair<int, string>(2222, "Rahul"));
+studentMap.insert(pair<int, string>(3333, "Shweta"));
+studentMap.insert(pair<int, string>(4444, "Aditi"));
+studentMap.insert(pair<int, string>(9999, "Pooja"));
+studentMap.insert(pair<int, string>(7777, "Ketaki"));
+mapType::iterator iter;
+cout<<"========Students of MMCOE==========\n";
+cout<<"\n Size of studentMap: "<<studentMap.size()<<"\n";
+for (iter = studentMap.begin(); iter != studentMap.end(); iter++) {
+cout << iter->first <<": "<< iter->second<<"\n";
+}
+int PRN;
+cout<<"\n Enter PRN of the student :";
+cin>>PRN;
+iter = studentMap.find(PRN);
+if( iter!= studentMap.end() ){
+cout<<" "<<PRN <<" 's name is " <<iter->second ;
+}else{
+cout<<"Key is not in studentMap"<<"\n";
+}
+cout<<"\n";  
+cout<<"\nErase PRN 4444\n";
+studentMap.erase(4444);
+cout<<"Map contains after erase\n";
+for (iter = studentMap.begin(); iter != studentMap.end(); iter++) {
+cout << iter->first <<": "<< iter->second<<"\n";
+}
+if(studentMap.empty()){
+	cout<<"\nMap is empty\n";
+	}else{
+		cout<<"\nMap is not empty\n";
+		}
+		
+studentMap.clear();
+cout<<"\nSize of map after clear : "<<studentMap.size()<<"\n";
+return 0;
+}
