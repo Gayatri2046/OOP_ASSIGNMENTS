@@ -1,0 +1,56 @@
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+class inventory {
+	private :
+	int id;
+	int price;
+	string name;
+	int quantity;
+	public:
+	void accept(){
+		cout<<"\nenter the name: ";
+		cin>>name;
+		cout<<"\nenter the id: ";
+		cin>>id;
+		cout<<"\nEnter the price: ";
+		cin>>price;
+		cout<<"\nenter the quantity: ";
+		cin>>quantity;
+		
+		cout<<"\n";
+		}
+		
+	void display(){
+		cout<<"Item Name :"<<name<<endl;
+		cout<<"Item Id :"<<id<<endl;
+		cout<<"Item Price :"<<price<<endl;
+		cout<<"Item Quantity :"<<quantity<<endl;
+		
+		
+		cout<<"\n";
+	}
+	};
+
+int main(){ //use array of objects
+	ofstream file_obj[5];
+	inventory obj[5];
+	cout<<"\nEnter records: ";
+	for(int i=0;i<5;i++){
+	obj[i].accept();
+	file_obj[i].open("input.txt");
+	file_obj[i].write((char*)&obj,sizeof(obj));
+	file_obj[i].close();
+    }
+    
+    for(int i=0;i<5;i++){
+	ifstream file_obj2;
+	file_obj2.open("input.txt");
+	file_obj2.read((char*)&obj,sizeof(obj));
+	obj[i].display();
+	file_obj2.close();
+     }
+	return 0;
+	}
